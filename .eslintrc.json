@@ -26,6 +26,14 @@
         "jsx": true,
         "experimentalObjectRestSpread": true
     },
+    {
+      "settings": {
+        "react": {
+          "createClass": "createClass",
+          "pragma": "React"
+        }
+      }
+    },
     "parser": "babel-eslint",
     "plugins": [
         "react"
