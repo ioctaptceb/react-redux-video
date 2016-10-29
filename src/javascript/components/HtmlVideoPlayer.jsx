@@ -1,6 +1,6 @@
 import React from 'react';
 
-const VideoPlayer = (props) => {
+const HtmlVideoPlayer = (props) => {
   return (
     <div>
       HTML Player
@@ -10,5 +10,5 @@ const VideoPlayer = (props) => {
   );
 }
 
-export default VideoPlayer;
+export default HtmlVideoPlayer;
 
