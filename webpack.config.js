@@ -1,12 +1,13 @@
 module.exports = {
   context: __dirname + '/src/javascript',
   entry: {
-    javascript: './main.js'
+    javascript: './main.jsx'
   },
   output: {
     path: __dirname + '/dist',
     filename: './bundle.js'
   },
+  devTool: 'source-map',
   devServer: {
     inline: true
   },
