@@ -3,7 +3,8 @@ import {shallow} from 'enzyme';
 import HtmlVideoPlayer from './HtmlVideoPlayer.jsx';
 
 it('contains a video element', () => {
-  const videoPlayer = shallow(<HtmlVideoPlayer />);
+  const sampleVideo = 'http://something.com/some-video'
+  const videoPlayer = shallow(<HtmlVideoPlayer videoUrl={sampleVideo}/>);
 
-  expect(videoPlayer.find('video')).toEqual('On');
+  expect(videoPlayer.find('video').props().src).toBe(sampleVideo);
 });
