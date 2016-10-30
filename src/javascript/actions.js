@@ -21,6 +21,12 @@ const changePlayState = () => {
   });
 };
 
+const changeMuteState = () => {
+  return ({
+    type: 'TOGGLE_MUTESTATE',
+  });
+};
+
 const setDuration = (duration) => {
   return ({
     type: 'SET_DURATION',
@@ -46,6 +52,7 @@ export {
   changeVideo,
   changeClickthrough,
   changePlayState,
+  changeMuteState,
   setDuration,
   updateCurrentPosition,
   updateBuffering

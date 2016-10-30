@@ -8,7 +8,7 @@ let oldPlayState;
 
 const ElapsedTime = ({currentPosition, duration, buffering, playState, dispatch}) => {
   clearTimeout(interval);
-  if (playState === 'play' && !buffering) {
+  if (playState && !buffering) {
     interval = setTimeout(() => {
       dispatch(updateCurrentPosition(currentPosition + 1));
     }, 1000);

@@ -1,5 +1,5 @@
 import React from 'react';
-import {setDuration, updateCurrentPosition, updateBuffering} from '../actions.js';
+import {setDuration, updateBuffering} from '../actions.js';
 import {connect} from 'react-redux';
 import {mapStateToProps} from '../store.js';
 
@@ -29,19 +29,17 @@ class HtmlVideoPlayer extends React.Component {
     this.player.pause();
   }
 
-  componentWillUpdate({playState, currentPosition}) {
+  componentWillUpdate({playState, muteState, currentPosition}) {
     if (currentPosition !== this.props.currentPosition ) {
       this.player.currentTime = currentPosition;
     }
-    switch(playState) {
-    case 'play':
+    if (playState) {
       this.play();
-      return;
-    case 'pause':
+    } else {
       this.pause();
-      return;
-    default:
-      return;
+    }
+    if (muteState !== this.props.muteState) {
+      this.player.muted = muteState;
     }
   }
 

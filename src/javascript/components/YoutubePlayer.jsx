@@ -1,6 +1,6 @@
 import React from 'react';
 import waitForYoutube from '../waitForYoutube.js';
-import {setDuration, updateCurrentPosition} from '../actions.js';
+import {setDuration} from '../actions.js';
 import {connect} from 'react-redux';
 import {mapStateToProps} from '../store.js';
 
@@ -49,20 +49,17 @@ class YoutubePlayer extends React.Component {
     this.player.pauseVideo();
   }
 
-  componentWillUpdate({playState, currentPosition}) {
+  componentWillUpdate({playState, muteState, currentPosition}) {
     if (currentPosition !== this.props.currentPosition) {
-      console.log(currentPosition);
       this.player.seekTo(currentPosition);
     }
-    switch(playState) {
-    case 'play':
+    if (playState) {
       this.play();
-      return;
-    case 'pause':
+    } else {
       this.pause();
-      return;
-    default:
-      return;
+    }
+    if (muteState !== this.props.muteState) {
+      muteState ? this.player.mute() : this.player.unMute();
     }
   }
 
