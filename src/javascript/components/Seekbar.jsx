@@ -1,8 +1,23 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {updateCurrentPosition} from '../actions';
+import {mapStateToProps} from '../store.js';
 
-const Seekbar = ({elapsedTime, onSeek}) => (
-  <input type='range' onChange={onSeek} value={elapsedTime} />
-);
+const Seekbar = ({currentPosition, duration, dispatch}) => {
+  const onSeek = (event) => {
+    const newTime = parseInt(event.target.value);
+    dispatch(updateCurrentPosition(newTime));
+  };
 
-export default Seekbar;
+  return (
+    <input
+      type='range'
+      onInput={onSeek}
+      value={currentPosition}
+      max={duration || 100}
+    />
+  );
+};
+
+export default connect(mapStateToProps)(Seekbar);
 

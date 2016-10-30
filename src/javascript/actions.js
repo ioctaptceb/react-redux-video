@@ -35,10 +35,10 @@ const updateCurrentPosition = (currentPosition) => {
   });
 };
 
-const seekTo = (seekPosition) => {
+const updateBuffering = (buffering) => {
   return ({
-    type: 'SEEK',
-    seekPosition
+    type: 'UPDATE_BUFFERING',
+    buffering
   });
 };
 
@@ -48,5 +48,5 @@ export {
   changePlayState,
   setDuration,
   updateCurrentPosition,
-  seekTo
+  updateBuffering
 };

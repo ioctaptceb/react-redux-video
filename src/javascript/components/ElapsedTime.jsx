@@ -6,9 +6,9 @@ import {updateCurrentPosition} from '../actions.js';
 let interval;
 let oldPlayState;
 
-const ElapsedTime = ({currentPosition, duration, playState, dispatch}) => {
+const ElapsedTime = ({currentPosition, duration, buffering, playState, dispatch}) => {
   clearTimeout(interval);
-  if (playState === 'play' && oldPlayState !== 'play') {
+  if (playState === 'play' && !buffering) {
     interval = setTimeout(() => {
       dispatch(updateCurrentPosition(currentPosition + 1));
     }, 1000);

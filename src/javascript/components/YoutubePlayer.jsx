@@ -47,12 +47,12 @@ class YoutubePlayer extends React.Component {
 
   pause() {
     this.player.pauseVideo();
-    this.dispatch(updateCurrentPosition(this.player.getCurrentTime()));
   }
 
-  componentWillUpdate({playState, seekPosition}) {
-    if (typeof seekPosition === 'number') {
-      this.player.seekTo(seekPosition);
+  componentWillUpdate({playState, currentPosition}) {
+    if (currentPosition !== this.props.currentPosition) {
+      console.log(currentPosition);
+      this.player.seekTo(currentPosition);
     }
     switch(playState) {
     case 'play':

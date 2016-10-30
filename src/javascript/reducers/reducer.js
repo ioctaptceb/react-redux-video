@@ -8,10 +8,10 @@ const reducer = (state = {}, action) => {
     return {...state, playState: state.playState === 'play' ? 'pause' : 'play'};
   case 'UPDATE_CURRENT_POSITION':
     return {...state, currentPosition: action.currentPosition};
+  case 'UPDATE_BUFFERING':
+    return {...state, buffering: action.buffering};
   case 'SET_DURATION':
     return {...state, duration: action.duration};
-  case 'SEEK':
-    return {...state, seekPosition: state.duration * (action.seekPosition / 100)};
   default:
     return state;
   }
