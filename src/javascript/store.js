@@ -11,5 +11,5 @@ const mapStateToVideoProps = (state) => ({
 
 const store = createStore(reducer, initialState);
 
-export { mapStateToVideoProps, store }
+export { mapStateToVideoProps, store };
 

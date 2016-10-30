@@ -6,7 +6,7 @@ const YoutubePlayer = (props) => {
       Youtube {props.videoId}
     </div>
   );
-}
+};
 
 export default YoutubePlayer;
 

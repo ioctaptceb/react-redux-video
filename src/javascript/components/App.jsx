@@ -1,7 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {store, mapStateToVideoProps} from '../store.js';
+import {mapStateToVideoProps} from '../store.js';
+import {changeVideo, changeClickthrough} from '../actions.js';
+import UrlInput from './UrlInput.jsx';
 import HtmlVideoPlayer from './HtmlVideoPlayer.jsx';
 import YoutubeVideoPlayer from './YoutubePlayer.jsx';
 
@@ -13,22 +15,24 @@ let App = ({videoInput, dispatch}) => {
       ? <YoutubeVideoPlayer />
       : <HtmlVideoPlayer />;
 
-  const changeVideo = (url) => ({
-    type: 'SET_VIDEO_URL',
-    url
-  });
+  const setVideoUrl = (event) => dispatch(changeVideo(event.target.value));
+
+  const setClickthroughUrl = (event) => dispatch(changeClickthrough(event.target.value));
 
   return (
     <div>
       <div className="input-components">
-        <label> Url Input
-          <input onBlur={(event) => dispatch(changeVideo(event.target.value))} />
-        </label>
+        <UrlInput onBlur={setVideoUrl}>
+          Set Video
+        </UrlInput>
+        <UrlInput onBlur={setClickthroughUrl}>
+          Set Clickthrough
+        </UrlInput>
       </div>
       {selectVideoPlayer()}
     </div>
   );
-}
+};
 
 App = connect(mapStateToVideoProps)(App);
 
