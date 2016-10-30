@@ -6,6 +6,8 @@
   "scripts": {
     "pack": "webpack",
     "start": "webpack-dev-server --hot",
+    "lint": "eslint .",
+    "checks": "npm run lint && npm test",
     "test": "jest"
   },
   "author": "Yulia Startsev",
