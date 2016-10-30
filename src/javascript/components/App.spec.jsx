@@ -16,17 +16,17 @@ it('renders an input', () => {
 });
 
 it('renders an html video when an extension is present', () => {
-  const state = {videoInput: 'something.mp4'};
+  const state = {videoInput: 'something.mp4', playState: 'play'};
   const defaultStore = createStore(mockReducer, state);
   const wrapper = mount(<App store={defaultStore} />);
-  expect(wrapper.contains(<HtmlVideoPlayer videoUrl={state.videoInput} />)).toBe(true);
+  expect(wrapper.contains(<HtmlVideoPlayer videoUrl={state.videoInput} playState={state.playState} />)).toBe(true);
 });
 
 it('renders a youtube video when the store has a youtube url', () => {
-  const state = {videoInput: '123123'};
+  const state = {videoInput: '123123', playState: 'play'};
   const youtubeStore = createStore(mockReducer, state);
   const wrapper = mount(<App store={youtubeStore} />);
-  expect(wrapper.contains(<YoutubePlayer videoId={state.videoInput} />)).toBe(true);
+  expect(wrapper.contains(<YoutubePlayer videoId={state.videoInput} playState={state.playState}/>)).toBe(true);
 });
 
 it('dispatches an event when the input is blurred', () => {
