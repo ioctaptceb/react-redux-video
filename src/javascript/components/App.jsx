@@ -6,6 +6,7 @@ import MuteButton from './MuteButton.jsx';
 import VideoContainer from './VideoContainer.jsx';
 import ElapsedTime from './ElapsedTime.jsx';
 import Seekbar from './Seekbar.jsx';
+import VolumeSlider from './VolumeSlider.jsx';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
       <MuteButton />
       <ElapsedTime />
       <Seekbar />
+      <VolumeSlider />
     </div>
   );
 };

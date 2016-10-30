@@ -49,7 +49,7 @@ class YoutubePlayer extends React.Component {
     this.player.pauseVideo();
   }
 
-  componentWillUpdate({playState, muteState, currentPosition}) {
+  componentWillUpdate({playState, muteState, volume, currentPosition}) {
     if (currentPosition !== this.props.currentPosition) {
       this.player.seekTo(currentPosition);
     }
@@ -60,6 +60,9 @@ class YoutubePlayer extends React.Component {
     }
     if (muteState !== this.props.muteState) {
       muteState ? this.player.mute() : this.player.unMute();
+    }
+    if (volume !== this.props.volume) {
+      this.player.setVolume(volume);
     }
   }
 

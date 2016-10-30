@@ -8,6 +8,8 @@ const reducer = (state = {}, action) => {
     return {...state, playState: !state.playState};
   case 'TOGGLE_MUTESTATE':
     return {...state, muteState: !state.muteState};
+  case 'UPDATE_VOLUME':
+    return {...state, volume: action.volume};
   case 'UPDATE_CURRENT_POSITION':
     return {...state, currentPosition: action.currentPosition};
   case 'UPDATE_BUFFERING':

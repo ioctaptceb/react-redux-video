@@ -41,6 +41,13 @@ const updateCurrentPosition = (currentPosition) => {
   });
 };
 
+const updateVolume = (volume) => {
+  return ({
+    type: 'UPDATE_VOLUME',
+    volume
+  });
+};
+
 const updateBuffering = (buffering) => {
   return ({
     type: 'UPDATE_BUFFERING',
@@ -55,5 +62,6 @@ export {
   changeMuteState,
   setDuration,
   updateCurrentPosition,
+  updateVolume,
   updateBuffering
 };

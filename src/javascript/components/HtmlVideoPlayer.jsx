@@ -29,7 +29,7 @@ class HtmlVideoPlayer extends React.Component {
     this.player.pause();
   }
 
-  componentWillUpdate({playState, muteState, currentPosition}) {
+  componentWillUpdate({playState, muteState, volume, currentPosition}) {
     if (currentPosition !== this.props.currentPosition ) {
       this.player.currentTime = currentPosition;
     }
@@ -40,6 +40,9 @@ class HtmlVideoPlayer extends React.Component {
     }
     if (muteState !== this.props.muteState) {
       this.player.muted = muteState;
+    }
+    if (volume !== this.props.volume) {
+      this.player.volume = volume / 100;
     }
   }
 
