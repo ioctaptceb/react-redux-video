@@ -1,14 +1,14 @@
 import React from 'react';
 
-const HtmlVideoPlayer = (props) => {
+const HtmlVideoPlayer = ({videoUrl}) => {
   return (
     <div>
       HTML Player
-      <video src={props.videoUrl} controls>
+      <video src={videoUrl}>
       </video>
     </div>
   );
-}
+};
 
 export default HtmlVideoPlayer;
 

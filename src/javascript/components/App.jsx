@@ -12,8 +12,8 @@ let App = ({videoInput, dispatch}) => {
 
   const selectVideoPlayer = () =>
     isYoutube()
-      ? <YoutubeVideoPlayer />
-      : <HtmlVideoPlayer />;
+      ? <YoutubeVideoPlayer videoId={videoInput}/>
+      : <HtmlVideoPlayer videoUrl={videoInput}/>;
 
   const setVideoUrl = (event) => dispatch(changeVideo(event.target.value));
 
