@@ -1,5 +1,8 @@
 import React from 'react';
 import waitForYoutube from '../waitForYoutube.js';
+import {setDuration} from '../actions.js';
+import {connect} from 'react-redux';
+import {mapStateToProps} from '../store.js';
 
 const sanitizeYoutubeVars = {
   controls: 0,
@@ -12,8 +15,9 @@ const sanitizeYoutubeVars = {
 };
 
 class YoutubePlayer extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.dispatch = this.props.dispatch;
   }
 
   componentDidMount() {
@@ -22,7 +26,7 @@ class YoutubePlayer extends React.Component {
         height: '390',
         width: '640',
         playerVars: sanitizeYoutubeVars,
-        videoId: this.props.videoId,
+        videoId: this.props.videoInput,
         events: {
           'onReady': () => {
             this.props.setDuration(this.player.getDuration());
@@ -31,6 +35,10 @@ class YoutubePlayer extends React.Component {
         }
       });
     });
+  }
+
+  setDuration(duration) {
+    this.dispatch(setDuration(duration));
   }
 
   componentWillUpdate({playState, seekPosition}) {
@@ -58,4 +66,4 @@ class YoutubePlayer extends React.Component {
   }
 }
 
-export default YoutubePlayer;
+export default connect(mapStateToProps)(YoutubePlayer);

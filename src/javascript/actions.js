@@ -15,11 +15,9 @@ const changeClickthrough = (url) => {
   });
 };
 
-const changePlayState = (currentPlayState) => {
-  const playState = currentPlayState === 'play' ? 'pause' : 'play';
+const changePlayState = () => {
   return ({
     type: 'TOGGLE_PLAYSTATE',
-    playState: playState
   });
 };
 
@@ -27,6 +25,13 @@ const setDuration = (duration) => {
   return ({
     type: 'SET_DURATION',
     duration
+  });
+};
+
+const updateCurrentPosition = (currentPosition) => {
+  return ({
+    type: 'UPDATE_CURRENT_POSITION',
+    currentPosition
   });
 };
 
@@ -42,5 +47,6 @@ export {
   changeClickthrough,
   changePlayState,
   setDuration,
+  updateCurrentPosition,
   seekTo
 };
