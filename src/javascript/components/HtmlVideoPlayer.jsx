@@ -25,7 +25,7 @@ class HtmlVideoPlayer extends React.Component {
 
   pause() {
     this.player.pause();
-    this.dispatch(updateCurrentPosition(this.currentTime));
+    this.dispatch(updateCurrentPosition(this.player.currentTime));
   }
   componentWillUpdate({playState}) {
     switch(playState) {

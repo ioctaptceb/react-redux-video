@@ -1,6 +1,6 @@
 import React from 'react';
 import waitForYoutube from '../waitForYoutube.js';
-import {setDuration} from '../actions.js';
+import {setDuration, updateCurrentPosition} from '../actions.js';
 import {connect} from 'react-redux';
 import {mapStateToProps} from '../store.js';
 
@@ -29,7 +29,7 @@ class YoutubePlayer extends React.Component {
         videoId: this.props.videoInput,
         events: {
           'onReady': () => {
-            this.props.setDuration(this.player.getDuration());
+            this.setDuration(this.player.getDuration());
             this.player.pauseVideo();
           }
         }
@@ -41,15 +41,26 @@ class YoutubePlayer extends React.Component {
     this.dispatch(setDuration(duration));
   }
 
+  play() {
+    this.player.playVideo();
+  }
+
+  pause() {
+    this.player.pauseVideo();
+    this.dispatch(updateCurrentPosition(this.player.getCurrentTime()));
+  }
+
   componentWillUpdate({playState, seekPosition}) {
     if (typeof seekPosition === 'number') {
       this.player.seekTo(seekPosition);
     }
     switch(playState) {
     case 'play':
-      return this.player.playVideo();
+      this.play();
+      return;
     case 'pause':
-      return this.player.pauseVideo();
+      this.pause();
+      return;
     default:
       return;
     }
