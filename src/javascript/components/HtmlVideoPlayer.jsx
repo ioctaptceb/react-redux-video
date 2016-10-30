@@ -5,6 +5,12 @@ class HtmlVideoPlayer extends React.Component {
     super();
   }
 
+  componentDidMount() {
+    this.player.addEventListener('loadedmetadata', () =>{
+      this.props.setDuration(this.player.duration);
+    });
+  }
+
   componentWillUpdate({playState}) {
     switch(playState) {
     case 'play':

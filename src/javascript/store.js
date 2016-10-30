@@ -7,8 +7,9 @@ const initialState = {
 
 const mapStateToVideoProps = (state) => ({
   videoInput: state.videoInput,
+  duration: state.duration,
   playState: state.playState
-})
+});
 
 const store = createStore(reducer, initialState);
 

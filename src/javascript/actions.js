@@ -23,4 +23,24 @@ const changePlayState = (currentPlayState) => {
   });
 };
 
-export {changeVideo, changeClickthrough, changePlayState};
+const setDuration = (duration) => {
+  return ({
+    type: 'SET_DURATION',
+    duration
+  });
+};
+
+const seekTo = (seekPosition) => {
+  return ({
+    type: 'SEEK',
+    seekPosition
+  });
+};
+
+export {
+  changeVideo,
+  changeClickthrough,
+  changePlayState,
+  setDuration,
+  seekTo
+};

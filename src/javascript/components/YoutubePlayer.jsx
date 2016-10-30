@@ -24,13 +24,19 @@ class YoutubePlayer extends React.Component {
         playerVars: sanitizeYoutubeVars,
         videoId: this.props.videoId,
         events: {
-          'onReady': () => this.player.pauseVideo()
+          'onReady': () => {
+            this.props.setDuration(this.player.getDuration());
+            this.player.pauseVideo();
+          }
         }
       });
     });
   }
 
-  componentWillUpdate({playState}) {
+  componentWillUpdate({playState, seekPosition}) {
+    if (typeof seekPosition === 'number') {
+      this.player.seekTo(seekPosition);
+    }
     switch(playState) {
     case 'play':
       return this.player.playVideo();
