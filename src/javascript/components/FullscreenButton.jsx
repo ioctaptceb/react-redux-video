@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {toggleFullscreen} from '../actions';
+import {toggleFullscreen} from '../actions/control';
 
 const FullscreenButton = ({dispatch}) => {
   const onToggleFullscreen = () => dispatch(toggleFullscreen(true));

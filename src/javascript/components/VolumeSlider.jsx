@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {updateVolume} from '../actions';
-import {mapStateToProps} from '../store.js';
+import {updateVolume} from '../actions/control';
+import {mapStateToProps} from '../store';
 
 const VolumeSlider = ({volume, dispatch}) => {
   const onVolumeChange = (event) => {
@@ -10,12 +10,15 @@ const VolumeSlider = ({volume, dispatch}) => {
   };
 
   return (
-    <input
-      type='range'
-      onChange={onVolumeChange}
-      value={volume}
-      max={100}
-    />
+    <label>
+      Volume
+      <input
+        type='range'
+        onChange={onVolumeChange}
+        value={volume}
+        max={100}
+      />
+    </label>
   );
 };
 

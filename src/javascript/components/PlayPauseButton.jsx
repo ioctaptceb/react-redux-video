@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {togglePlay} from '../actions';
+import {togglePlay} from '../actions/control';
 
 const PlayPauseButton = ({dispatch}) => {
   const onTogglePlay = () => dispatch(togglePlay());

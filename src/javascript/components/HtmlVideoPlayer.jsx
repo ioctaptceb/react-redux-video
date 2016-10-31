@@ -1,8 +1,10 @@
 import React from 'react';
-import {setDuration, updateBuffering} from '../actions.js';
+import {setDuration} from '../actions/time';
+import config from '../config';
 import {connect} from 'react-redux';
-import {mapStateToProps} from '../store.js';
-import Track from '../timeTrackers.js';
+import {mapStateToProps} from '../store';
+import track from '../utils/track';
+import {hasSeeked, hasChanged, getFullscreen} from '../utils/helpers';
 
 class HtmlVideoPlayer extends React.Component {
   constructor(props) {
@@ -15,49 +17,46 @@ class HtmlVideoPlayer extends React.Component {
     player.addEventListener('loadedmetadata', () =>{
       this.dispatch(setDuration(player.duration));
     });
-    player.addEventListener('waiting', this.dispatch(updateBuffering(true)));
-    player.addEventListener('canplay', this.dispatch(updateBuffering(false)));
-    player.requestFullscreen =
-      player.requestFullScreen || player.mozRequestFullScreen || player.webkitRequestFullScreen;
-  }
-
-  hasChanged(value, string) {
-    value !== this.props[string];
-  }
-
-  hasSeeked(currentPosition) {
-    return Math.abs(currentPosition - this.props.currentPosition) > 10;
+    player.requestFullscreen = getFullscreen(player);
   }
 
   componentWillUpdate({currentPosition, play, mute, fullscreen, volume}) {
-    if (this.hasSeeked(currentPosition) ) {
+    const oldProps = this.props;
+    if (hasSeeked(currentPosition, oldProps.currentPosition) ) {
       this.player.currentTime = currentPosition;
     }
-    if (this.hasChanged(play, 'play')) {
+    if (hasChanged(play, oldProps.play)) {
       play ? this.player.play() : this.player.pause();
     }
-    if (this.hasChanged(mute, 'mute')) {
+    if (hasChanged(mute, oldProps.mute)) {
       this.player.muted = mute;
     }
-    if (this.hasChanged(fullscreen, 'fullscreen')) {
+    if (hasChanged(fullscreen, oldProps.fullscreen)) {
       this.player.requestFullscreen();
     }
-    if (this.hasChanged(volume, 'volume')) {
+    if (hasChanged(volume, oldProps.volume)) {
       this.player.volume = volume / 100;
     }
   }
 
   componentDidUpdate() {
-    Track();
+    track(
+      this.props.currentPosition,
+      this.props.duration,
+      this.props.totalTime,
+      this.props.play
+    );
   }
 
   render() {
     return (
-      <div>
-        HTML Player
-        <video ref={(node) => {this.player = node;}} src={this.props.videoInput}>
-        </video>
-      </div>
+      <video
+        width={config.width}
+        height={config.height}
+        ref={(node) => {this.player = node;}}
+        src={this.props.videoInput}
+      >
+      </video>
     );
   }
 }

@@ -1,9 +1,11 @@
 import React from 'react';
-import waitForYoutube from '../waitForYoutube.js';
-import {setDuration} from '../actions.js';
+import waitForYoutube from '../utils/waitForYoutube';
+import config from '../config';
+import {setDuration} from '../actions/time';
 import {connect} from 'react-redux';
-import {mapStateToProps} from '../store.js';
-import Track from '../timeTrackers.js';
+import {mapStateToProps} from '../store';
+import {hasSeeked, hasChanged, getFullscreen} from '../utils/helpers';
+import track from '../utils/track';
 
 const YOUTUBE_VARS = {
   controls: 0,
@@ -24,8 +26,8 @@ class YoutubePlayer extends React.Component {
   componentDidMount() {
     waitForYoutube.then((youtube) => {
       const player = new youtube.Player('youtube-player', {
-        height: '390',
-        width: '640',
+        height: config.height,
+        width: config.width,
         playerVars: YOUTUBE_VARS,
         allowfullscreen: true,
         videoId: this.props.videoInput,
@@ -36,40 +38,37 @@ class YoutubePlayer extends React.Component {
           }
         }
       });
-      player.requestFullscreen =
-        player.requestFullScreen || player.mozRequestFullScreen || player.webkitRequestFullScreen;
+      player.requestFullscreen = getFullscreen(player);
       this.player = player;
     });
   }
 
-  hasChanged(value, string) {
-    return value !== this.props[string];
-  }
-
-  hasSeeked(currentPosition) {
-    return Math.abs(currentPosition - this.props.currentPosition) > 10;
-  }
-
   componentWillUpdate({currentPosition, play, mute, fullscreen, volume}) {
-    if (this.hasSeeked(currentPosition) ) {
+    const oldProps = this.props;
+    if (hasSeeked(currentPosition, oldProps.currentPosition) ) {
       this.player.seekTo(currentPosition);
     }
-    if (this.hasChanged(play, 'play')) {
+    if (hasChanged(play, oldProps.play)) {
       play ? this.player.playVideo() : this.player.pauseVideo();
     }
-    if (this.hasChanged(mute, 'mute')) {
+    if (hasChanged(mute, oldProps.mute)) {
       mute ? this.player.mute() : this.player.unMute();
     }
-    if (this.hasChanged(fullscreen, 'fullscreen')) {
+    if (hasChanged(fullscreen, oldProps.fullscreen)) {
       this.player.requestFullScreen();
     }
-    if (this.hasChanged(volume, 'volume')) {
+    if (hasChanged(volume, oldProps.volume)) {
       this.player.setVolume(volume);
     }
   }
 
   componentDidUpdate() {
-    Track();
+    track(
+      this.props.currentPosition,
+      this.props.duration,
+      this.props.totalTime,
+      this.props.play
+    );
   }
 
   componentWillUnmount() {

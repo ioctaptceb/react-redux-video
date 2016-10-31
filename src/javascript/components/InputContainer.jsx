@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import UrlInput from './UrlInput.jsx';
-import {changeVideo, changeClickthrough} from '../actions';
+import {changeVideo, changeClickthrough} from '../actions/input';
 
 const InputContainer = ({dispatch}) => {
   const setVideoUrl = (event) => dispatch(changeVideo(event.target.value));

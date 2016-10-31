@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import {mapStateToProps} from '../store.js';
+import {mapStateToProps} from '../store';
 import HtmlVideoPlayer from './HtmlVideoPlayer.jsx';
 import YoutubePlayer from './YoutubePlayer.jsx';
 

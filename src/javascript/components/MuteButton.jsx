@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {toggleMute} from '../actions';
+import {toggleMute} from '../actions/control';
 
 const MuteButton = ({dispatch}) => {
   const onToggleMute = () => dispatch(toggleMute());

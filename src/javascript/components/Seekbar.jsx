@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {updateCurrentPosition} from '../actions';
+import {updateCurrentPosition} from '../actions/time';
 import {mapStateToProps} from '../store.js';
 
 const Seekbar = ({currentPosition, duration, dispatch}) => {

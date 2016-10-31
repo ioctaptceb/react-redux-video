@@ -1,19 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {mapStateToProps} from '../store.js';
-import {updateCurrentPosition, updateTotalTime} from '../actions.js';
 
-let interval;
-
-const ElapsedTime = ({currentPosition, duration, play, dispatch}) => {
-  clearTimeout(interval);
-  if (play) {
-    interval = setTimeout(() => {
-      dispatch(updateCurrentPosition(currentPosition + 1));
-      dispatch(updateTotalTime());
-    }, 1000);
-  }
-
+const ElapsedTime = ({currentPosition, duration}) => {
   const secondsToMinutes = (time) => {
     const adjustedSeconds = Math.floor(time);
     const minutes = Math.floor(adjustedSeconds / 60);
