@@ -17,8 +17,12 @@ const trackQuarterly = (currentPosition, duration) => {
 
 const trackAdImpression = (totalTime) => {
   if (totalTime >= 5) {
-    console.info('Ad Impression'); // eslint-disable-line no-console
+    console.info('Ad Impression Event'); // eslint-disable-line no-console
   }
+};
+
+const trackClickthrough = () => {
+  console.info('Click Through Event'); // eslint-disable-line no-console
 };
 
 const track = (currentPosition, duration, totalTime, play) => {
@@ -33,5 +37,5 @@ const track = (currentPosition, duration, totalTime, play) => {
 };
 
 
-export default track;
+export {track, trackClickthrough};
 

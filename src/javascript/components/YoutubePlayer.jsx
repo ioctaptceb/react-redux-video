@@ -5,7 +5,7 @@ import {setDuration} from '../actions/time';
 import {connect} from 'react-redux';
 import {mapStateToProps} from '../store';
 import {hasSeeked, hasChanged, getFullscreen} from '../utils/helpers';
-import track from '../utils/track';
+import {track} from '../utils/track';
 
 const YOUTUBE_VARS = {
   controls: 0,
@@ -77,7 +77,10 @@ class YoutubePlayer extends React.Component {
 
   render() {
     return (
-      <div id="youtube-player"></div>
+      <div
+        id="youtube-player"
+        className='video'
+      ></div>
     );
   }
 }

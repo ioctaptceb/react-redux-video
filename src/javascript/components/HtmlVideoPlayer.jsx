@@ -3,7 +3,7 @@ import {setDuration} from '../actions/time';
 import config from '../config';
 import {connect} from 'react-redux';
 import {mapStateToProps} from '../store';
-import track from '../utils/track';
+import {track} from '../utils/track';
 import {hasSeeked, hasChanged, getFullscreen} from '../utils/helpers';
 
 class HtmlVideoPlayer extends React.Component {
@@ -51,6 +51,7 @@ class HtmlVideoPlayer extends React.Component {
   render() {
     return (
       <video
+        className='video'
         width={config.width}
         height={config.height}
         ref={(node) => {this.player = node;}}

@@ -13,6 +13,7 @@ const initialState = {
 
 const mapStateToProps = (state) => ({
   videoInput: state.videoInput,
+  clickthrough: state.clickthrough,
   duration: state.duration,
   currentPosition: state.currentPosition,
   totalTime: state.totalTime,

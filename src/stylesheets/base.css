@@ -1,0 +1,21 @@
+.overlay {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+}
+
+.video {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+}
+
+.video-container {
+  width: 648px;
+  height: 480px;
+  position: relative;
+}

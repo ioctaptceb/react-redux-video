@@ -12,7 +12,6 @@ import VolumeSlider from './VolumeSlider.jsx';
 const App = () => {
   return (
     <div>
-      <InputContainer />
       <VideoContainer />
       <PlayPauseButton />
       <MuteButton />
@@ -20,6 +19,7 @@ const App = () => {
       <ElapsedTime />
       <Seekbar />
       <VolumeSlider />
+      <InputContainer />
     </div>
   );
 };
