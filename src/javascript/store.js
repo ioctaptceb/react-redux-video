@@ -5,7 +5,8 @@ const initialState = {
   videoInput: 'https://archive.org/download/bacteria_friend_and_foe/bacteria_friend_and_foe_512kb.mp4',
   duration: 0,
   volume: 50,
-  playState: false,
+  totalTime: 0,
+  play: false,
   buffering: false,
   currentPosition: 0
 };
@@ -14,10 +15,12 @@ const mapStateToProps = (state) => ({
   videoInput: state.videoInput,
   duration: state.duration,
   currentPosition: state.currentPosition,
+  totalTime: state.totalTime,
   volume: state.volume,
   buffering: state.buffering,
-  muteState: state.muteState,
-  playState: state.playState
+  fullscreen: state.fullscreen,
+  mute: state.mute,
+  play: state.play
 });
 
 const store = createStore(reducer, initialState);

@@ -2,6 +2,7 @@ import React from 'react';
 import {setDuration, updateBuffering} from '../actions.js';
 import {connect} from 'react-redux';
 import {mapStateToProps} from '../store.js';
+import Track from '../timeTrackers.js';
 
 class HtmlVideoPlayer extends React.Component {
   constructor(props) {
@@ -10,40 +11,44 @@ class HtmlVideoPlayer extends React.Component {
   }
 
   componentDidMount() {
-    this.player.addEventListener('loadedmetadata', () =>{
-      this.setDuration(this.player.duration);
+    const player = this.player;
+    player.addEventListener('loadedmetadata', () =>{
+      this.dispatch(setDuration(player.duration));
     });
-    this.player.addEventListener('waiting', this.dispatch(updateBuffering(true)));
-    this.player.addEventListener('canplay', this.dispatch(updateBuffering(false)));
+    player.addEventListener('waiting', this.dispatch(updateBuffering(true)));
+    player.addEventListener('canplay', this.dispatch(updateBuffering(false)));
+    player.requestFullscreen =
+      player.requestFullScreen || player.mozRequestFullScreen || player.webkitRequestFullScreen;
   }
 
-  setDuration(duration) {
-    this.dispatch(setDuration(duration));
+  hasChanged(value, string) {
+    value !== this.props[string];
   }
 
-  play() {
-    this.player.play();
+  hasSeeked(currentPosition) {
+    return Math.abs(currentPosition - this.props.currentPosition) > 10;
   }
 
-  pause() {
-    this.player.pause();
-  }
-
-  componentWillUpdate({playState, muteState, volume, currentPosition}) {
-    if (currentPosition !== this.props.currentPosition ) {
+  componentWillUpdate({currentPosition, play, mute, fullscreen, volume}) {
+    if (this.hasSeeked(currentPosition) ) {
       this.player.currentTime = currentPosition;
     }
-    if (playState) {
-      this.play();
-    } else {
-      this.pause();
+    if (this.hasChanged(play, 'play')) {
+      play ? this.player.play() : this.player.pause();
     }
-    if (muteState !== this.props.muteState) {
-      this.player.muted = muteState;
+    if (this.hasChanged(mute, 'mute')) {
+      this.player.muted = mute;
     }
-    if (volume !== this.props.volume) {
+    if (this.hasChanged(fullscreen, 'fullscreen')) {
+      this.player.requestFullscreen();
+    }
+    if (this.hasChanged(volume, 'volume')) {
       this.player.volume = volume / 100;
     }
+  }
+
+  componentDidUpdate() {
+    Track();
   }
 
   render() {

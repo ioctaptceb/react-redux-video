@@ -1,15 +1,15 @@
 import React from 'react';
 import {shallow} from 'enzyme';
-import HtmlVideoPlayer from './HtmlVideoPlayer.jsx';
+import HtmlVideoPlayer from '../../src/javascript/components/HtmlVideoPlayer.jsx';
 
-xit('contains a video element', () => {
+it('contains a video element', () => {
   const sampleVideo = 'http://something.com/some-video';
   const videoPlayer = shallow(<HtmlVideoPlayer videoUrl={sampleVideo}/>);
 
   expect(videoPlayer.find('video').props().src).toBe(sampleVideo);
 });
 
-xit('plays a video when playState changes to play', () => {
+it('plays a video when playState changes to play', () => {
   const sampleVideo = 'http://something.com/some-video';
   const videoPlayer = shallow(<HtmlVideoPlayer videoUrl={sampleVideo}/>);
   const instance = videoPlayer.instance();
@@ -18,7 +18,7 @@ xit('plays a video when playState changes to play', () => {
   expect(instance.player.play).toHaveBeenCalled();
 });
 
-xit('pauses a video when playState changes to pause', () => {
+it('pauses a video when playState changes to pause', () => {
   const sampleVideo = 'http://something.com/some-video';
   const videoPlayer = shallow(<HtmlVideoPlayer videoUrl={sampleVideo}/>);
   const instance = videoPlayer.instance();

@@ -1,16 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {mapStateToProps} from '../store.js';
-import {updateCurrentPosition} from '../actions.js';
+import {updateCurrentPosition, updateTotalTime} from '../actions.js';
 
 let interval;
-let oldPlayState;
 
-const ElapsedTime = ({currentPosition, duration, buffering, playState, dispatch}) => {
+const ElapsedTime = ({currentPosition, duration, play, dispatch}) => {
   clearTimeout(interval);
-  if (playState && !buffering) {
+  if (play) {
     interval = setTimeout(() => {
       dispatch(updateCurrentPosition(currentPosition + 1));
+      dispatch(updateTotalTime());
     }, 1000);
   }
 

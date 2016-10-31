@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {changeMuteState} from '../actions';
+import {toggleMute} from '../actions';
 
 const MuteButton = ({dispatch}) => {
-  const toggleMute = () => dispatch(changeMuteState());
+  const onToggleMute = () => dispatch(toggleMute());
   return (
-    <button onClick={toggleMute}>mute/unmute</button>
+    <button onClick={onToggleMute}>mute/unmute</button>
   );
 };
 

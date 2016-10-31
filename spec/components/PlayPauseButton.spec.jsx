@@ -1,9 +1,9 @@
 import React from 'react';
 import {shallow} from 'enzyme';
 import {createStore} from 'redux';
-import PlayPauseButton from './PlayPauseButton.jsx';
+import PlayPauseButton from '../../src/javascript/components/PlayPauseButton.jsx';
 
-xit('contains an Button element', () => {
+it('contains an Button element', () => {
   const wrapper = shallow(<PlayPauseButton />);
   expect(wrapper.find('button').length).toBe(1);
 });

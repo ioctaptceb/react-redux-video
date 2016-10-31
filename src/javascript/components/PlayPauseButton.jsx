@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {changePlayState} from '../actions';
+import {togglePlay} from '../actions';
 
 const PlayPauseButton = ({dispatch}) => {
-  const togglePlayPause = () => dispatch(changePlayState());
+  const onTogglePlay = () => dispatch(togglePlay());
   return (
-    <button onClick={togglePlayPause}>Play/Pause</button>
+    <button onClick={onTogglePlay}>Play/Pause</button>
   );
 };
 

@@ -15,15 +15,22 @@ const changeClickthrough = (url) => {
   });
 };
 
-const changePlayState = () => {
+const togglePlay = () => {
   return ({
     type: 'TOGGLE_PLAYSTATE',
   });
 };
 
-const changeMuteState = () => {
+const toggleMute = () => {
   return ({
     type: 'TOGGLE_MUTESTATE',
+  });
+};
+
+const toggleFullscreen = (fullscreen) => {
+  return ({
+    type: 'TOGGLE_FULLSCREEN',
+    fullscreen
   });
 };
 
@@ -48,6 +55,12 @@ const updateVolume = (volume) => {
   });
 };
 
+const updateTotalTime = () => {
+  return ({
+    type: 'UPDATE_TOTAL_TIME',
+  });
+};
+
 const updateBuffering = (buffering) => {
   return ({
     type: 'UPDATE_BUFFERING',
@@ -58,8 +71,9 @@ const updateBuffering = (buffering) => {
 export {
   changeVideo,
   changeClickthrough,
-  changePlayState,
-  changeMuteState,
+  togglePlay,
+  toggleMute,
+  toggleFullscreen,
   setDuration,
   updateCurrentPosition,
   updateVolume,

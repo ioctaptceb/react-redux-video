@@ -1,7 +1,7 @@
 import React from 'react';
 import {mount} from 'enzyme';
 import { createStore } from 'redux';
-import YoutubePlayer from './YoutubePlayer.jsx';
+import YoutubePlayer from '../../src/javascript/components/YoutubePlayer.jsx';
 
 describe('YoutubePlayer', () => {
   let mockReducer;
