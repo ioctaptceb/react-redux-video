@@ -11,7 +11,7 @@ const VolumeSlider = ({volume, dispatch}) => {
 
   return (
     <label>
-      Volume
+      Volume:
       <input
         type='range'
         onChange={onVolumeChange}

@@ -10,12 +10,15 @@ const Seekbar = ({currentPosition, duration, dispatch}) => {
   };
 
   return (
-    <input
-      type='range'
-      onChange={onSeek}
-      value={currentPosition}
-      max={duration || 100}
-    />
+    <label>
+      Seek:
+      <input
+        type='range'
+        onChange={onSeek}
+        value={currentPosition}
+        max={duration || 100}
+      />
+    </label>
   );
 };
 
