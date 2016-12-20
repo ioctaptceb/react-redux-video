@@ -11,6 +11,9 @@ module.exports = {
   devServer: {
     inline: true
   },
+  resolve: {
+    extensions: ['.js', '.jsx', '']
+  },
   module: {
     loaders: [
       {
